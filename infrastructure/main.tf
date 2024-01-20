@@ -26,10 +26,10 @@ provider "google" {
   Services
  ****************************************/
 
-#  module "test_service" {
-#   # count                 = var.environment == "dev" ? 0 : 1
-#   source                = "./services/test-service"
-#   project               = var.project
-#   region                = var.region
-#   bucket_functions      = google_storage_bucket.cloud_function_bucket.name
-# }
+module "test_service" {
+  # count                 = var.environment == "dev" ? 0 : 1
+  source           = "./services/test-service"
+  project          = var.project
+  region           = var.region
+  bucket_functions = google_storage_bucket.cloud_function_bucket.name
+}
