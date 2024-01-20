@@ -32,3 +32,11 @@ module "test_service" {
   region           = var.region
   bucket_functions = google_storage_bucket.cloud_function_bucket.name
 }
+
+/******************************************
+	Cloud Storage
+ *****************************************/
+resource "google_storage_bucket" "cloud_function_bucket" {
+  name     = "functions-${var.project}"
+  location = var.region
+}

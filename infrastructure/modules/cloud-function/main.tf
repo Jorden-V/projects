@@ -79,13 +79,13 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
 	Triggers
  *****************************************/
 module "trigger_provision" {
-  name          = "function-${var.function_name}-provision"
-  description   = "Provision ${var.function_name} Service (CI/CD)"
-  source        = "../../modules/cloud-trigger"
-  filename      = var.function_path == "" ? "services/${var.service_name}/functions/${var.function_name}/cloudbuild.yaml" : "${var.function_path}/cloudbuild.yaml"
-  include       = var.function_path == "" ? ["services/${var.service_name}/functions/${var.function_name}/**"] : ["${var.function_path}/**"]
-  tags          = ["function"]
-  branch        = var.branching_strategy.provision.branch
-  invert_regex  = var.branching_strategy.provision.invert_regex
+  name        = "function-${var.function_name}-provision"
+  description = "Provision ${var.function_name} Service (CI/CD)"
+  source      = "../../modules/cloud-trigger"
+  filename    = var.function_path == "" ? "services/${var.service_name}/functions/${var.function_name}/cloudbuild.yaml" : "${var.function_path}/cloudbuild.yaml"
+  include     = var.function_path == "" ? ["services/${var.service_name}/functions/${var.function_name}/**"] : ["${var.function_path}/**"]
+  tags        = ["function"]
+  # branch        = var.branching_strategy.provision.branch
+  # invert_regex  = var.branching_strategy.provision.invert_regex
   substitutions = merge(local.default_substitution_vars, var.trigger_substitutions)
 }
