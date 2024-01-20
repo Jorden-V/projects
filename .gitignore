@@ -1,0 +1,9 @@
+.env
+.terraform/
+dist
+terraform.tfstate*
+node_modules
+.DS_Store
+.vscode
+*.crt
+*.pem
