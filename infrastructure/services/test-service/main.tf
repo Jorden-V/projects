@@ -9,7 +9,7 @@ locals {
 
 module "cloud_function_test_service" {
   source                = "../../modules/cloud-function"
-  function_name         = "test-service"
+  function_name         = "test-services"
   function_type         = "node"
   function_description  = "tests"
   region                = var.region
