@@ -34,6 +34,7 @@ steps:
           echo "  }" >> backend.tf
           echo "}" >> backend.tf
           echo "project = \"${PROJECT_ID}\"" >> environment.auto.tfvars
+          echo "artifact_repository = \"projects-docker-repo\"" >> environment.auto.tfvars
           terraform init || exit 1
         else
           echo "***************************** SKIPPING INIT ************************************"
