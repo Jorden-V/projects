@@ -15,7 +15,7 @@ steps:
     args:
       - "-c"
       - |
-        cd "infrastructure/"
+        cd "infrastructure/environments/prod/environments/prod"
         echo "terraform {" >> backend.tf
         echo "  required_providers {" >> backend.tf
         echo "    google = {" >> backend.tf
@@ -42,7 +42,7 @@ steps:
     args:
       - "-c"
       - |
-        cd "infrastructure/"
+        cd "infrastructure/environments/prod/"
           terraform validate || exit 1
 
   # [END tf-validate]
@@ -53,7 +53,7 @@ steps:
     args:
       - "-c"
       - |
-        cd "infrastructure/"
+        cd "infrastructure/environments/prod/"
           terraform plan || exit 1
   # [END tf-plan]
   # [START tf-apply]
@@ -67,7 +67,7 @@ steps:
 
         if [[ "$TRIGGER_NAME" == "setup-projects" ]]; then
           echo "Applying terraform changes..."
-          cd infrastructure/
+          cd infrastructure/environments/prod/
           export TF_LOG=
           terraform apply -auto-approve
         fi
