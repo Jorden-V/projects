@@ -15,34 +15,25 @@ steps:
     args:
       - "-c"
       - |
-        if [ -d "$$ENV_ROOT/$_BUILD_ENV/" ]; then
-          cd $$ENV_ROOT/$_BUILD_ENV
-          echo "$$ENV_ROOT/$_BUILD_ENV/"
-          
-          echo "terraform {" >> backend.tf
-          echo "  required_providers {" >> backend.tf
-          echo "    google = {" >> backend.tf
-          echo "      source  = \"hashicorp/google\"" >> backend.tf
-          echo "      version = \"~> 4.78.0\"" >> backend.tf
-          echo "    }" >> backend.tf
-          echo "    google-beta = {" >> backend.tf
-          echo "      source  = \"hashicorp/google-beta\"" >> backend.tf
-          echo "      version = \"~> 4.78.0\"" >> backend.tf
-          echo "    }" >> backend.tf
-          echo "  }" >> backend.tf
-          echo "  backend \"gcs\" {" >> backend.tf
-          echo "    bucket = \"${PROJECT_ID}-${_PROJECT_REGION}-state\"" >> backend.tf
-          echo "  }" >> backend.tf
-          echo "}" >> backend.tf
-          echo "project = \"${PROJECT_ID}\"" >> environment.auto.tfvars
-          echo "artifact_repository = \"projects-docker-repo\"" >> environment.auto.tfvars
-          terraform init || exit 1
-        else
-          echo "***************************** SKIPPING INIT ************************************"
-          echo "$$ENV_ROOT/$_BUILD_ENV folder not found in branch '$BRANCH_NAME'."
-          echo "********************************************************************************"
-          exit 1
-        fi
+        cd "infrastructure/"
+        echo "terraform {" >> backend.tf
+        echo "  required_providers {" >> backend.tf
+        echo "    google = {" >> backend.tf
+        echo "      source  = \"hashicorp/google\"" >> backend.tf
+        echo "      version = \"~> 4.78.0\"" >> backend.tf
+        echo "    }" >> backend.tf
+        echo "    google-beta = {" >> backend.tf
+        echo "      source  = \"hashicorp/google-beta\"" >> backend.tf
+        echo "      version = \"~> 4.78.0\"" >> backend.tf
+        echo "    }" >> backend.tf
+        echo "  }" >> backend.tf
+        echo "  backend \"gcs\" {" >> backend.tf
+        echo "    bucket = \"${PROJECT_ID}-${_PROJECT_REGION}-state\"" >> backend.tf
+        echo "  }" >> backend.tf
+        echo "}" >> backend.tf
+        echo "project = \"${PROJECT_ID}\"" >> environment.auto.tfvars
+        echo "artifact_repository = \"projects-docker-repo\"" >> environment.auto.tfvars
+        terraform init || exit 1
   # [END tf-init]
   # [START tf-validate]
   - id: "tf validate"
@@ -51,15 +42,9 @@ steps:
     args:
       - "-c"
       - |
-        if [ -d "$$ENV_ROOT/$_BUILD_ENV/" ]; then
-          cd $$ENV_ROOT/$_BUILD_ENV
+        cd "infrastructure/"
           terraform validate || exit 1
-        else
-          echo "***************************** SKIPPING VALIDATE ********************************"
-          echo "$$ENV_ROOT/$_BUILD_ENV folder not found in branch '$BRANCH_NAME'."
-          echo "********************************************************************************"
-          exit 1
-        fi
+
   # [END tf-validate]
   # [START tf-plan]
   - id: "tf plan"
@@ -68,15 +53,8 @@ steps:
     args:
       - "-c"
       - |
-        if [ -d "$$ENV_ROOT/$_BUILD_ENV/" ]; then
-          cd $$ENV_ROOT/$_BUILD_ENV
+        cd "infrastructure/"
           terraform plan || exit 1
-        else
-          echo "***************************** SKIPPING PLAN ************************************"
-          echo "$$ENV_ROOT/$_BUILD_ENV folder not found in branch '$BRANCH_NAME'."
-          echo "********************************************************************************"
-          exit 1
-        fi
   # [END tf-plan]
   # [START tf-apply]
   - id: "tf apply"
@@ -85,21 +63,13 @@ steps:
     args:
       - "-c"
       - |
-        if [ -d "$$ENV_ROOT/$_BUILD_ENV/" ]; then
-          echo "Applying terraform changes for trigger $TRIGGER_NAME"
-          
-          if [[ "$TRIGGER_NAME" == "setup-projects" ]]; then
-            echo "Applying terraform changes..."
-            cd $$ENV_ROOT/$_BUILD_ENV
-            export TF_LOG=
-            terraform apply -auto-approve
-          fi
-        else
-          echo "***************************** SKIPPING APPLYING *******************************"
-          echo "$$ENV_ROOT/$BRANCH_NAME folder not found in branch '$BRANCH_NAME'."
-          echo "Or"
-          echo "Branch '$BRANCH_NAME' does not represent an official environment."
-          echo "*******************************************************************************"
+        echo "Applying terraform changes for trigger $TRIGGER_NAME"
+
+        if [[ "$TRIGGER_NAME" == "setup-projects" ]]; then
+          echo "Applying terraform changes..."
+          cd infrastructure/
+          export TF_LOG=
+          terraform apply -auto-approve
         fi
     # [END tf-apply]
 substitutions:
