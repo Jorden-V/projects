@@ -1,3 +1,3 @@
 # projects
 
-New Project
+New Project.
