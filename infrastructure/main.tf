@@ -22,6 +22,54 @@ provider "google" {
   access_token = data.google_service_account_access_token.default.access_token
 }
 
+locals {
+  cloud_build_member = "serviceAccount:${data.google_project.current.number}@cloudbuild.gserviceaccount.com"
+}
+
+/******************************************
+	Service Accounts
+ *****************************************/
+resource "google_project_iam_member" "cloud_build_perm_1" {
+  project = var.project
+  role    = "roles/secretmanager.secretAccessor"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_2" {
+  project = var.project
+  role    = "roles/iam.serviceAccountUser"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_3" {
+  project = var.project
+  role    = "roles/run.admin"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_4" {
+  project = var.project
+  role    = "roles/compute.admin"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_5" {
+  project = var.project
+  role    = "roles/logging.admin"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_6" {
+  project = var.project
+  role    = "roles/storage.admin"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_7" {
+  project = var.project
+  role    = "roles/pubsub.admin"
+  member  = local.cloud_build_member
+}
+resource "google_project_iam_member" "cloud_build_perm_8" {
+  project = var.project
+  role    = "roles/compute.networkAdmin"
+  member  = local.cloud_build_member
+}
+
 /*****************************************
   Services
  ****************************************/
