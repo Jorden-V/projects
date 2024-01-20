@@ -13,7 +13,6 @@ variable "trigger_substitutions" {
 variable "region" {
   default = "europe-west2"
 }
-variable "environment" {}
 variable "public" {
   type    = bool
   default = false
@@ -24,7 +23,6 @@ variable "service_account_email" {
 variable "available_memory_mb" {
   default = "128"
 }
-variable "notification_channels" {}
 variable "trigger_http" {
   default = true
 }

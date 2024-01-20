@@ -8,11 +8,10 @@ locals {
  *****************************************/
 
 module "cloud_function_test_service" {
-  source                = "../../../modules/cloud-function"
+  source                = "../../modules/cloud-function"
   function_name         = "test-service"
   function_type         = "node"
   function_description  = "tests"
-  environment           = var.environment
   region                = var.region
   service_name          = local.service_name
   function_path         = "services/test/${local.service_name}"

@@ -88,5 +88,4 @@ module "trigger_provision" {
   branch        = var.branching_strategy.provision.branch
   invert_regex  = var.branching_strategy.provision.invert_regex
   substitutions = merge(local.default_substitution_vars, var.trigger_substitutions)
-  environment   = var.environment
 }

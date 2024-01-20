@@ -27,7 +27,6 @@ provider "google" {
  ****************************************/
 
 module "test_service" {
-  # count                 = var.environment == "dev" ? 0 : 1
   source           = "./services/test-service"
   project          = var.project
   region           = var.region
