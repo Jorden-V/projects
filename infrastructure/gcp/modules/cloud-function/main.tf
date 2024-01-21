@@ -81,7 +81,7 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
 module "trigger_provision" {
   name        = "function-${var.function_name}-provision"
   description = "Provision ${var.function_name} Service (CI/CD)"
-  source      = "../modules/cloud-trigger"
+  source      = "../cloud-trigger"
   filename    = var.function_path == "" ? "services/${var.service_name}/functions/${var.function_name}/cloudbuild.yaml" : "${var.function_path}/cloudbuild.yaml"
   include     = var.function_path == "" ? ["services/${var.service_name}/functions/${var.function_name}/**"] : ["${var.function_path}/**"]
   tags        = ["function"]
