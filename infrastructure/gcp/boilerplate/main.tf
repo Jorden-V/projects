@@ -75,8 +75,3 @@ resource "google_project_organization_policy" "key_creation_allowed" {
     enforced = false
   }
 }
-
-
-
-
-

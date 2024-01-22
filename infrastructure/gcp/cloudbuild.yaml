@@ -65,7 +65,7 @@ steps:
       - |
         echo "Applying terraform changes for trigger $TRIGGER_NAME"
 
-        if [[ "$TRIGGER_NAME" == "setup-projects" ]]; then
+        if [[ "$TRIGGER_NAME" == "provision-setup-projects" ]]; then
           echo "Applying terraform changes..."
           cd infrastructure/environments/prod/
           export TF_LOG=
