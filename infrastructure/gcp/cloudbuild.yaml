@@ -67,7 +67,7 @@ steps:
 
         if [[ "$TRIGGER_NAME" == "provision-setup-projects" ]]; then
           echo "Applying terraform changes..."
-          cd infrastructure/environments/prod/
+          cd infrastructure/gcp/environments/prod/
           export TF_LOG=
           terraform apply -auto-approve
         fi
