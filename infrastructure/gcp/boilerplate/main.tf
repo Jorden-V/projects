@@ -52,12 +52,12 @@ resource "google_project_iam_member" "cloud_build_perm_8" {
   Services
  ****************************************/
 
-module "test_service" {
-  source           = "../services/test-service"
-  project          = var.project
-  region           = var.region
-  bucket_functions = google_storage_bucket.cloud_function_bucket.name
-}
+# module "test_service" {
+#   source           = "../services/test-service"
+#   project          = var.project
+#   region           = var.region
+#   bucket_functions = google_storage_bucket.cloud_function_bucket.name
+# }
 
 /******************************************
 	Cloud Storage
