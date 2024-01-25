@@ -1,16 +1,16 @@
 steps:
   # This step builds the container image.
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: "gcr.io/cloud-builders/gcloud"
     id: Deploy
     entrypoint: bash
     args:
-      - '-c'
-        gcloud functions deploy ${_FUNCTION_NAME} \
-          --entry-point=datastoreBackup \
-          --source=${_FUNCTION_PATH} \
-          --trigger-http \
-          --timeout=540 \
-          --memory=512 \
-          --runtime=nodejs20 \
-          --region=${_LOCATION}  \
-          --allow-unauthenticated
+      - "-c"
+      - "gcloud functions deploy ${_FUNCTION_NAME} \
+        --entry-point=datastoreBackup \
+        --source=${_FUNCTION_PATH} \
+        --trigger-http \
+        --timeout=540 \
+        --memory=512 \
+        --runtime=nodejs20 \
+        --region=${_LOCATION}  \
+        --allow-unauthenticated"
