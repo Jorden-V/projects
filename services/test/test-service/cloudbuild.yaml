@@ -6,7 +6,7 @@ steps:
     args:
       - "-c"
       - "gcloud functions deploy ${_FUNCTION_NAME} \
-        --entry-point=datastoreBackup \
+        --entry-point=testService \
         --source=${_FUNCTION_PATH} \
         --trigger-http \
         --timeout=540 \
