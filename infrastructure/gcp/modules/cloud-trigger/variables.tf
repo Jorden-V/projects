@@ -13,7 +13,7 @@ variable "substitutions" {
   }
 }
 variable "branch" {
-  default = "DEFAULT"
+  default = "main"
 }
 
 variable "invert_regex" {
