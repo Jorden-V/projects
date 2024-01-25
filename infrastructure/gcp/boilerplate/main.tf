@@ -67,11 +67,11 @@ resource "google_storage_bucket" "cloud_function_bucket" {
   location = var.region
 }
 
-resource "google_project_organization_policy" "key_creation_allowed" {
-  project    = var.project
-  constraint = "iam.disableServiceAccountKeyCreation"
+# resource "google_project_organization_policy" "key_creation_allowed" {
+#   project    = var.project
+#   constraint = "iam.disableServiceAccountKeyCreation"
 
-  boolean_policy {
-    enforced = false
-  }
-}
+#   boolean_policy {
+#     enforced = false
+#   }
+# }
